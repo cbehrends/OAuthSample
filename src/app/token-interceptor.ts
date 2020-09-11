@@ -20,7 +20,12 @@ export class TokenInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-    request = TokenInterceptor.addToken(request, this.authService.getIdToken() as string);
+    const token = this.authService.getToken();
+
+    if (!token) {
+      return next.handle(request);
+    }
+    request = TokenInterceptor.addToken(request, token);
     return next.handle(request)
       .pipe(
         catchError(error => {

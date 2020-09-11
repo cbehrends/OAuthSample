@@ -7,7 +7,7 @@ import {NO_ERRORS_SCHEMA} from "@angular/core";
 import {OidcSecurityService} from "angular-auth-oidc-client";
 
 describe(`AuthHttpInterceptor`, () => {
-  const service = jasmine.createSpyObj("OidcSecurityService", ["getIdToken", "forceRefreshSession"]);
+  const service = jasmine.createSpyObj("OidcSecurityService", ["getToken", "forceRefreshSession"]);
   let httpMock: HttpTestingController;
   let httpClientMock: HttpClient;
 
@@ -35,7 +35,7 @@ describe(`AuthHttpInterceptor`, () => {
   });
 
   it("should add an Authorization header", (done) => {
-    service.getIdToken.and.returnValue("FOOOO");
+    service.getToken.and.returnValue("FOOOO");
 
     httpClientMock.get("/data").subscribe(
       response => {

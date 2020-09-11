@@ -60,11 +60,11 @@ export function configureAuth(oidcConfigService: OidcConfigService) {
             deps: [OidcConfigService],
             multi: true,
         },
-      {
-        provide: HTTP_INTERCEPTORS,
-        useClass: TokenInterceptor,
-        multi: true
-      }
+        {
+          provide: HTTP_INTERCEPTORS,
+          useClass: TokenInterceptor,
+          multi: true
+        }
     ],
     bootstrap: [AppComponent],
 })
